@@ -12,21 +12,12 @@ use pocketmine\item\Item;
 use pocketmine\event\Listener;
 use pocketmine\world\World;
 use pocketmine\block\Block;
-use pocketmine\block\IronOre;
-use pocketmine\block\Cobblestone;
-use pocketmine\block\DiamondOre;
-use pocketmine\block\EmeraldOre;
-use pocketmine\block\GoldOre;
-use pocketmine\block\CoalOre;
-use pocketmine\block\Lava;
-use pocketmine\block\LapisOre;
-use pocketmine\block\RedstoneOre;
+use pocketmine\block\VanillaBlocks;
 use pocketmine\block\Water;
 
 class Generate extends PluginBase implements Listener {
     
     public function onEnable(): void {
-        $this->getLogger()->info("Plugin RandomOre by piyushbest!");
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
@@ -38,35 +29,35 @@ class Generate extends PluginBase implements Listener {
             $nearBlock = $block->getSide($i);
             if ($nearBlock instanceof Water) {
                 $water = true;
-            } elseif ($nearBlock instanceof Lava) { // Changed from "lava" to "Lava" with a capital 'L'
+            } elseif ($nearBlock instanceof Lava) {
                 $lava = true;
             }
             if ($water && $lava) {
                 $id = mt_rand(1, 20);
                 switch ($id) {
                     case 2:
-                        $newBlock = new IronOre();
+                        $newBlock = VanillaBlocks::IRON_ORE();
                         break;
                     case 4:
-                        $newBlock = new GoldOre();
+                        $newBlock = VanillaBlocks::GOLD_ORE();
                         break;
                     case 6:
-                        $newBlock = new EmeraldOre();
+                        $newBlock = VanillaBlocks::EMERALD_ORE();
                         break;
                     case 8:
-                        $newBlock = new CoalOre();
+                        $newBlock = VanillaBlocks::COAL_ORE();
                         break;
                     case 10:
-                        $newBlock = new RedstoneOre();
+                        $newBlock = VanillaBlocks::REDSTONE_ORE();
                         break;
                     case 12:
-                        $newBlock = new DiamondOre();
+                        $newBlock = VanillaBlocks::DIAMOND_ORE();
                         break;
                     case 14:
-                        $newBlock = new LapisOre();
+                        $newBlock = VanillaBlocks::LAPIS_ORE();
                         break;
                     default:
-                        $newBlock = new Cobblestone();
+                        $newBlock = VanillaBlocks::COBBSTONE();
                 }
                 $block->getWorld()->setBlock($block, $newBlock, true, false);
                 return;
