@@ -3,13 +3,8 @@
 namespace RaindomOre;
 
 use pocketmine\plugin\PluginBase;
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-use pocketmine\math\Vector3;
-use pocketmine\Player;
-use pocketmine\event\block\BlockUpdateEvent;
-use pocketmine\item\Item;
 use pocketmine\event\Listener;
+use pocketmine\event\block\BlockUpdateEvent;
 use pocketmine\world\World;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
@@ -23,46 +18,49 @@ class Generate extends PluginBase implements Listener {
     }
 
     public function onBlockSet(BlockUpdateEvent $event) {
-    $block = $event->getBlock();
-    $water = false;
-    $lava = false;
-    for ($i = 2; $i <= 5; $i++) {
-        $nearBlock = $block->getSide($i);
-        if ($nearBlock instanceof Water) {
-            $water = true;
-        } elseif ($nearBlock instanceof Lava) {
-            $lava = true;
-        }
-        if ($water && $lava) {
-            $id = mt_rand(1, 20);
-            switch ($id) {
-                case 2:
-                    $newBlock = VanillaBlocks::IRON_ORE();
-                    break;
-                case 4:
-                    $newBlock = VanillaBlocks::GOLD_ORE();
-                    break;
-                case 6:
-                    $newBlock = VanillaBlocks::EMERALD_ORE();
-                    break;
-                case 8:
-                    $newBlock = VanillaBlocks::COAL_ORE();
-                    break;
-                case 10:
-                    $newBlock = VanillaBlocks::REDSTONE_ORE();
-                    break;
-                case 12:
-                    $newBlock = VanillaBlocks::DIAMOND_ORE();
-                    break;
-                case 14:
-                    $newBlock = VanillaBlocks::LAPIS_LAZULI_ORE();
-                    break;
-                default:
-                    $newBlock = VanillaBlocks::COBBLESTONE();
+        $block = $event->getBlock();
+        $water = false;
+        $lava = false;
+        
+        for ($i = 2; $i <= 5; $i++) {
+            $nearBlock = $block->getSide($i);
+            if ($nearBlock instanceof Water) {
+                $water = true;
+            } elseif ($nearBlock instanceof Lava) {
+                $lava = true;
             }
-            $world = $block->getWorld();
-            $world->setBlock($block->getPosition(), $newBlock);
-            return;
+            
+            if ($water && $lava) {
+                $id = mt_rand(1, 20);
+                switch ($id) {
+                    case 2:
+                        $newBlock = VanillaBlocks::IRON_ORE();
+                        break;
+                    case 4:
+                        $newBlock = VanillaBlocks::GOLD_ORE();
+                        break;
+                    case 6:
+                        $newBlock = VanillaBlocks::EMERALD_ORE();
+                        break;
+                    case 8:
+                        $newBlock = VanillaBlocks::COAL_ORE();
+                        break;
+                    case 10:
+                        $newBlock = VanillaBlocks::REDSTONE_ORE();
+                        break;
+                    case 12:
+                        $newBlock = VanillaBlocks::DIAMOND_ORE();
+                        break;
+                    case 14:
+                        $newBlock = VanillaBlocks::LAPIS_LAZULI_ORE();
+                        break;
+                    default:
+                        $newBlock = VanillaBlocks::COBBLESTONE();
+                }
+                
+                $world = $block->getWorld();
+                $world->setBlockId($block->getX(), $block->getY(), $block->getZ(), $newBlock->getId());
+                return;
             }
         }
     }
