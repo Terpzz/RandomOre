@@ -14,6 +14,7 @@ use pocketmine\world\World;
 use pocketmine\block\Block;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\block\Water;
+use pocketmine\block\Lava;
 
 class Generate extends PluginBase implements Listener {
     
@@ -54,10 +55,10 @@ class Generate extends PluginBase implements Listener {
                         $newBlock = VanillaBlocks::DIAMOND_ORE();
                         break;
                     case 14:
-                        $newBlock = VanillaBlocks::LAPIS_ORE();
+                        $newBlock = VanillaBlocks::LAPIS_LAZULI_ORE();
                         break;
                     default:
-                        $newBlock = VanillaBlocks::COBBSTONE();
+                        $newBlock = VanillaBlocks::COBBLESTONE();
                 }
                 $block->getWorld()->setBlock($block, $newBlock, true, false);
                 return;
