@@ -26,7 +26,6 @@ class Generate extends PluginBase implements Listener {
     $block = $event->getBlock();
     $water = false;
     $lava = false;
-
     for ($i = 2; $i <= 5; $i++) {
         $nearBlock = $block->getSide($i);
         if ($nearBlock instanceof Water) {
@@ -61,11 +60,8 @@ class Generate extends PluginBase implements Listener {
                 default:
                     $newBlock = VanillaBlocks::COBBLESTONE();
             }
-
-            $world = $block->getWorld();
-            $newPosition = $block->asVector3();
-
-            $world->setBlock($newPosition, $newBlock, true);
+            $world = $block->getPosition()->getWorld();
+            $world->setBlock($block->getPosition(), $newBlock, true);
             return;
             }
         }
