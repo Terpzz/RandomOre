@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/Terpzz/RandomOre
+build-by-default: true
+branches:
+- master
+projects:
+  RandomOre:
+    path: ""
+...
