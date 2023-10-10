@@ -60,7 +60,7 @@ class Generate extends PluginBase implements Listener {
                     default:
                         $newBlock = VanillaBlocks::COBBLESTONE();
                 }
-                $block->setBlock($newBlock);
+                $event->getWorld()->setBlock($block->getPosition(), $newBlock);
                 return;
             }
         }
