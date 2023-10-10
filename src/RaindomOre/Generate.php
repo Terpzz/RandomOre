@@ -11,12 +11,11 @@ use pocketmine\block\VanillaBlocks;
 class Generate extends PluginBase {
 
     public function onEnable(): void {
-        $this->getServer()->getPluginManager()->registerEvents(new OreGenerator($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new Generate($this), $this);
     }
 }
 
 class OreGenerator {
-    private $plugin;
 
     public function __construct(Generate $plugin) {
         $this->plugin = $plugin;
@@ -30,7 +29,7 @@ class OreGenerator {
 
             for ($x = -2; $x <= 2; $x++) {
                 for ($z = -2; $z <= 2; $z++) {
-                    $nearBlock = $block->getSide($x, 0, $z);
+                    $nearBlock = $block->getSide($x, $z);
                     if ($nearBlock instanceof Water) {
                         $waterNearby = true;
                         break;
