@@ -10,7 +10,7 @@ use pocketmine\Player;
 use pocketmine\event\block\BlockUpdateEvent;
 use pocketmine\item\Item;
 use pocketmine\event\Listener;
-use pocketmine\level\Level;
+use pocketmine\world\World;
 use pocketmine\block\Block;
 use pocketmine\block\IronOre;
 use pocketmine\block\Cobblestone;
@@ -25,7 +25,7 @@ use pocketmine\block\Water;
 
 class Generate extends PluginBase implements Listener{
     
-    public function onEnable(){
+    public function onEnable():void {
         $this->getLogger()->info("Plugin RandomOre by piyushbest!");
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
     }
@@ -68,7 +68,7 @@ class Generate extends PluginBase implements Listener{
                     default:
                         $newBlock = new Cobblestone();
                 }
-                $block->getLevel()->setBlock($block, $newBlock, true, false);
+                $block->getWorld()->setBlock($block, $newBlock, true, false);
                 return;
             }
         }
